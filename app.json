@@ -1,0 +1,68 @@
+{
+  "expo": {
+    "name": "TravelApp",
+    "slug": "TravelApp",
+    "version": "1.0.0",
+    "scheme": "travelapp",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.travelapp.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "TravelApp needs your location to find nearby places.",
+        "NSCameraUsageDescription": "TravelApp needs camera access to take photos for your posts.",
+        "NSPhotoLibraryUsageDescription": "TravelApp needs photo library access to share photos in your posts."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.travelapp.app",
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#1a73e8"
+        }
+      ],
+      "expo-video",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "TravelApp needs your location to find nearby places."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "TravelApp needs access to your photos to share in your posts.",
+          "cameraPermission": "TravelApp needs access to your camera to take photos for your posts."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
