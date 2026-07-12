@@ -141,11 +141,11 @@ export function getPhotoUrl(photoRef: string, maxWidth: number = 400): string {
   return `${BASE_URL}/${photoRef}/media?maxWidthPx=${maxWidth}&key=${API_KEY}`;
 }
 
-export async function geocodeCity(query: string): Promise<{ lat: number; lng: number } | null> {
+export async function geocodeCity(query: string): Promise<{ lat: number; lng: number; country: string } | null> {
   if (!API_KEY) return null;
 
   const cacheKey = `geocode:${query.toLowerCase()}`;
-  const cached = await getCached<{ lat: number; lng: number }>(cacheKey);
+  const cached = await getCached<{ lat: number; lng: number; country: string }>(cacheKey);
   if (cached) return cached;
 
   const response = await fetch(`${BASE_URL}/places:searchText`, {
@@ -153,7 +153,7 @@ export async function geocodeCity(query: string): Promise<{ lat: number; lng: nu
     headers: {
       'Content-Type': 'application/json',
       'X-Goog-Api-Key': API_KEY,
-      'X-Goog-FieldMask': 'places.location',
+      'X-Goog-FieldMask': 'places.location,places.addressComponents',
     },
     body: JSON.stringify({
       textQuery: query,
@@ -167,9 +167,14 @@ export async function geocodeCity(query: string): Promise<{ lat: number; lng: nu
   const place = data.places?.[0];
   if (!place?.location) return null;
 
+  const countryComponent = (place.addressComponents || []).find(
+    (c: any) => c.types?.includes('country')
+  );
+
   const result = {
     lat: place.location.latitude,
     lng: place.location.longitude,
+    country: countryComponent?.longText || '',
   };
 
   await setCache(cacheKey, result, TTL_GEOCODE);

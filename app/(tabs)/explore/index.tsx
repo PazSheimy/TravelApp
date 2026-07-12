@@ -46,7 +46,7 @@ export default function ExploreScreen() {
     try {
       const location = await geocodeCity(query);
       if (location) {
-        handleCityPress(query, location.lat, location.lng);
+        handleCityPress(query, location.lat, location.lng, location.country);
       } else {
         Alert.alert('Not Found', `Could not find "${query}". Try a different city name or zip code.`);
       }
