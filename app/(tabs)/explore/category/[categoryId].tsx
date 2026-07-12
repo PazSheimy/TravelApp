@@ -16,6 +16,7 @@ import { Colors } from '@/constants/colors';
 import { Spacing, FontSize, BorderRadius } from '@/constants/layout';
 import { CATEGORIES, CATEGORY_SUBCATEGORIES } from '@/constants/categories';
 import { searchPlaces, getPhotoUrl } from '@/services/googlePlaces';
+import { AdBanner } from '@/components/AdBanner';
 import type { Place } from '@/types';
 
 function renderStars(rating: number) {
@@ -177,6 +178,7 @@ export default function CategoryScreen() {
                 <FontAwesome name="chevron-right" size={14} color={Colors.textLight} />
               </TouchableOpacity>
             )}
+            ListFooterComponent={<AdBanner />}
             ListEmptyComponent={
               <View style={styles.centered}>
                 <FontAwesome name="search" size={40} color={Colors.textLight} />

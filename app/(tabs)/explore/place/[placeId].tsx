@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   FlatList,
   Dimensions,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -17,6 +18,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Colors } from '@/constants/colors';
 import { Spacing, FontSize, BorderRadius } from '@/constants/layout';
 import { getPlaceDetails, getPhotoUrl } from '@/services/googlePlaces';
+import { trackPlaceView } from '@/services/ads';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -46,6 +48,12 @@ export default function PlaceDetailScreen() {
     queryFn: () => getPlaceDetails(placeId!),
     enabled: !!placeId,
   });
+
+  useEffect(() => {
+    if (Platform.OS !== 'web') {
+      trackPlaceView();
+    }
+  }, []);
 
   const handleDirections = () => {
     if (place?.location) {

@@ -1,19 +1,19 @@
 {
   "expo": {
-    "name": "TravelApp",
-    "slug": "TravelApp",
+    "name": "Vamo",
+    "slug": "vamo",
     "version": "1.0.0",
-    "scheme": "travelapp",
+    "scheme": "vamo",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.travelapp.app",
+      "bundleIdentifier": "com.vamo.app",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "TravelApp needs your location to find nearby places.",
-        "NSCameraUsageDescription": "TravelApp needs camera access to take photos for your posts.",
-        "NSPhotoLibraryUsageDescription": "TravelApp needs photo library access to share photos in your posts."
+        "NSLocationWhenInUseUsageDescription": "Vamo needs your location to find nearby places.",
+        "NSCameraUsageDescription": "Vamo needs camera access to take photos for your posts.",
+        "NSPhotoLibraryUsageDescription": "Vamo needs photo library access to share photos in your posts."
       }
     },
     "android": {
@@ -23,7 +23,7 @@
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
-      "package": "com.travelapp.app",
+      "package": "com.vamo.app",
       "permissions": [
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION",
@@ -38,6 +38,13 @@
       "expo-router",
       "expo-image",
       [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3940256099942544~3347511713",
+          "iosAppId": "ca-app-pub-3940256099942544~1458002511"
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/splash-icon.png",
@@ -50,14 +57,14 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "TravelApp needs your location to find nearby places."
+          "locationWhenInUsePermission": "Vamo needs your location to find nearby places."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "TravelApp needs access to your photos to share in your posts.",
-          "cameraPermission": "TravelApp needs access to your camera to take photos for your posts."
+          "photosPermission": "Vamo needs access to your photos to share in your posts.",
+          "cameraPermission": "Vamo needs access to your camera to take photos for your posts."
         }
       ]
     ],
