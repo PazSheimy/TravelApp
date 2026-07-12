@@ -12,11 +12,12 @@ import { Spacing, FontSize, BorderRadius } from '@/constants/layout';
 import { CATEGORIES } from '@/constants/categories';
 
 export default function CityScreen() {
-  const { cityId, cityName, lat, lng } = useLocalSearchParams<{
+  const { cityId, cityName, lat, lng, country } = useLocalSearchParams<{
     cityId: string;
     cityName: string;
     lat: string;
     lng: string;
+    country: string;
   }>();
 
   const displayName = cityName || cityId;
@@ -24,7 +25,7 @@ export default function CityScreen() {
   const handleCategoryPress = (categoryId: string, categoryName: string) => {
     router.push({
       pathname: '/(tabs)/explore/category/[categoryId]',
-      params: { categoryId, categoryName, cityId: cityId!, cityName: displayName, lat: lat!, lng: lng! },
+      params: { categoryId, categoryName, cityId: cityId!, cityName: displayName, lat: lat!, lng: lng!, country: country || '' },
     });
   };
 

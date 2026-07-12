@@ -22,7 +22,7 @@ const POPULAR_CITIES = [
   { id: '3', name: 'Rome', country: 'Italy', emoji: '🇮🇹', lat: 41.9028, lng: 12.4964 },
   { id: '4', name: 'London', country: 'United Kingdom', emoji: '🇬🇧', lat: 51.5074, lng: -0.1278 },
   { id: '5', name: 'Tokyo', country: 'Japan', emoji: '🇯🇵', lat: 35.6762, lng: 139.6503 },
-  { id: '6', name: 'New York', country: 'USA', emoji: '🇺🇸', lat: 40.7128, lng: -74.006 },
+  { id: '6', name: 'New York', country: 'United States', emoji: '🇺🇸', lat: 40.7128, lng: -74.006 },
   { id: '7', name: 'Amsterdam', country: 'Netherlands', emoji: '🇳🇱', lat: 52.3676, lng: 4.9041 },
   { id: '8', name: 'Berlin', country: 'Germany', emoji: '🇩🇪', lat: 52.52, lng: 13.405 },
 ];
@@ -31,10 +31,10 @@ export default function ExploreScreen() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
 
-  const handleCityPress = (cityName: string, lat: number, lng: number) => {
+  const handleCityPress = (cityName: string, lat: number, lng: number, country?: string) => {
     router.push({
       pathname: '/(tabs)/explore/city/[cityId]',
-      params: { cityId: cityName, cityName, lat: lat.toString(), lng: lng.toString() },
+      params: { cityId: cityName, cityName, lat: lat.toString(), lng: lng.toString(), country: country || '' },
     });
   };
 
@@ -99,7 +99,7 @@ export default function ExploreScreen() {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.cityCard}
-            onPress={() => handleCityPress(item.name, item.lat, item.lng)}
+            onPress={() => handleCityPress(item.name, item.lat, item.lng, item.country)}
             activeOpacity={0.7}
           >
             <Text style={styles.cityEmoji}>{item.emoji}</Text>

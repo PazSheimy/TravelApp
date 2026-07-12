@@ -14,10 +14,42 @@ import { Image } from 'expo-image';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Colors } from '@/constants/colors';
 import { Spacing, FontSize, BorderRadius } from '@/constants/layout';
-import { CATEGORIES, CATEGORY_SUBCATEGORIES } from '@/constants/categories';
+import { CATEGORIES, CATEGORY_SUBCATEGORIES, EMERGENCY_NUMBERS } from '@/constants/categories';
 import { searchPlaces, getPhotoUrl } from '@/services/googlePlaces';
 import { AdBanner } from '@/components/AdBanner';
 import type { Place } from '@/types';
+
+function EmergencyBanner({ country }: { country: string }) {
+  const numbers = EMERGENCY_NUMBERS[country];
+  if (!numbers) return null;
+
+  return (
+    <View style={emergencyStyles.banner}>
+      <View style={emergencyStyles.header}>
+        <FontAwesome name="phone" size={16} color={Colors.white} />
+        <Text style={emergencyStyles.title}>Emergency Numbers — {country}</Text>
+      </View>
+      <View style={emergencyStyles.grid}>
+        <View style={emergencyStyles.item}>
+          <Text style={emergencyStyles.label}>General</Text>
+          <Text style={emergencyStyles.number}>{numbers.general}</Text>
+        </View>
+        <View style={emergencyStyles.item}>
+          <Text style={emergencyStyles.label}>Police</Text>
+          <Text style={emergencyStyles.number}>{numbers.police}</Text>
+        </View>
+        <View style={emergencyStyles.item}>
+          <Text style={emergencyStyles.label}>Ambulance</Text>
+          <Text style={emergencyStyles.number}>{numbers.ambulance}</Text>
+        </View>
+        <View style={emergencyStyles.item}>
+          <Text style={emergencyStyles.label}>Fire</Text>
+          <Text style={emergencyStyles.number}>{numbers.fire}</Text>
+        </View>
+      </View>
+    </View>
+  );
+}
 
 function renderStars(rating: number) {
   const stars = [];
@@ -40,13 +72,14 @@ function renderPrice(level: number) {
 }
 
 export default function CategoryScreen() {
-  const { categoryId, categoryName, cityName, lat, lng } = useLocalSearchParams<{
+  const { categoryId, categoryName, cityName, lat, lng, country } = useLocalSearchParams<{
     categoryId: string;
     categoryName: string;
     cityId: string;
     cityName: string;
     lat: string;
     lng: string;
+    country: string;
   }>();
   const [activeSubcategory, setActiveSubcategory] = useState('all');
 
@@ -130,6 +163,9 @@ export default function CategoryScreen() {
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.list}
             style={styles.flatList}
+            ListHeaderComponent={
+              categoryId === 'emergency' && country ? <EmergencyBanner country={country} /> : null
+            }
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.placeCard}
@@ -315,5 +351,46 @@ const styles = StyleSheet.create({
   emptyText: {
     fontSize: FontSize.md,
     color: Colors.textSecondary,
+  },
+});
+
+const emergencyStyles = StyleSheet.create({
+  banner: {
+    backgroundColor: '#dc2626',
+    borderRadius: BorderRadius.md,
+    padding: Spacing.md,
+    marginBottom: Spacing.md,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+    marginBottom: Spacing.sm,
+  },
+  title: {
+    fontSize: FontSize.md,
+    fontWeight: '700',
+    color: Colors.white,
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: Spacing.sm,
+  },
+  item: {
+    width: '46%',
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    borderRadius: BorderRadius.sm,
+    padding: Spacing.sm,
+  },
+  label: {
+    fontSize: FontSize.xs,
+    color: 'rgba(255,255,255,0.8)',
+    marginBottom: 2,
+  },
+  number: {
+    fontSize: FontSize.lg,
+    fontWeight: '800',
+    color: Colors.white,
   },
 });

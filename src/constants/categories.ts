@@ -183,6 +183,14 @@ export const CATEGORIES: Category[] = [
     textSearchFallback: 'car rental rent a car vehicle hire',
   },
   {
+    id: 'conferences',
+    name: 'Conferences',
+    icon: 'calendar',
+    color: '#6d28d9',
+    googlePlacesType: 'convention_center',
+    textSearchFallback: 'conference convention center event venue expo',
+  },
+  {
     id: 'emergency',
     name: 'Emergency',
     icon: 'plus-square',
@@ -256,6 +264,15 @@ export const TRANSPORT_SUBCATEGORIES: Subcategory[] = [
   { id: 'parking', name: 'Airport Parking', searchQuery: 'airport parking long term parking' },
 ];
 
+export const CONFERENCES_SUBCATEGORIES: Subcategory[] = [
+  { id: 'all', name: 'All', searchQuery: 'conference convention center event venue expo' },
+  { id: 'convention', name: 'Convention Centers', searchQuery: 'convention center conference hall exhibition center' },
+  { id: 'tech', name: 'Tech & Business', searchQuery: 'tech conference business summit startup event coworking' },
+  { id: 'cultural', name: 'Cultural Events', searchQuery: 'cultural event festival concert venue theater' },
+  { id: 'sports', name: 'Sports Events', searchQuery: 'stadium arena sports venue sports event' },
+  { id: 'trade', name: 'Trade Shows', searchQuery: 'trade show expo fair exhibition hall' },
+];
+
 export const CARRENTAL_SUBCATEGORIES: Subcategory[] = [
   { id: 'all', name: 'All', searchQuery: 'car rental rent a car vehicle hire' },
   { id: 'airport', name: 'Airport Rentals', searchQuery: 'airport car rental car hire airport' },
@@ -289,6 +306,7 @@ export const CATEGORY_SUBCATEGORIES: Record<string, Subcategory[]> = {
   pets: PETS_SUBCATEGORIES,
   transport: TRANSPORT_SUBCATEGORIES,
   carrental: CARRENTAL_SUBCATEGORIES,
+  conferences: CONFERENCES_SUBCATEGORIES,
   emergency: EMERGENCY_SUBCATEGORIES,
 };
 
