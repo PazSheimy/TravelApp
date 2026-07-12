@@ -246,6 +246,7 @@ export const PETS_SUBCATEGORIES: Subcategory[] = [
   { id: 'petstores', name: 'Pet Stores', searchQuery: 'pet store pet shop pet supplies' },
   { id: 'vets', name: 'Vets', searchQuery: 'veterinarian vet clinic animal hospital' },
   { id: 'grooming', name: 'Grooming', searchQuery: 'dog grooming pet grooming pet salon' },
+  { id: 'adoption', name: 'Adoption', searchQuery: 'pet adoption animal shelter rescue center adopt a dog adopt a cat' },
 ];
 
 export const WATERFUN_SUBCATEGORIES: Subcategory[] = [
